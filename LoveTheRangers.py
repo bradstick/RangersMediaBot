@@ -341,6 +341,7 @@ while rebootInterval > sleepInterval:
     time.sleep(sleepInterval)
     print("Checking for updates...")
     try:
+        logging.info("Get Tweets")
         responseTweets = requests.get(urlTweets, headers=headersTweets, params=querystringTweets)
         listresults = json.loads(responseTweets.text)
         timeline = listresults["timeline"]
@@ -379,8 +380,8 @@ while rebootInterval > sleepInterval:
                         xeets.append(textToPost)
                         print(textToPost)
                         if(count <=30):  ##Bluesky limits you to so many posts per minute.  This counter is to prevent being rate limited
+                            logging.info("Posting to Bluesky: " + textToPost)
                             postToBluesky(textToPost, img_url, client)
-                            logging.info("Posted to Bluesky: " + textToPost)
                         else:
                             print("Tweet has too many characters or rate limit exceeded.  Not posting to Bluesky -- " + textToPost)
                             logging.error("Tweet has too many characters or rate limit exceeded.  Not posting to Bluesky -- " + textToPost)
@@ -393,8 +394,8 @@ while rebootInterval > sleepInterval:
                         xeets.append(textToPost)
                         print(textToPost)
                         if(count <=30):  ##Bluesky limits you to so many posts per minute.  This counter is to prevent being rate limited
+                            logging.info("POsting to Bluesky: " + textToPost)
                             postToBluesky(textToPost, img_url, client)
-                            logging.info("Posted to Bluesky: " + textToPost)
                         else:
                             print("Tweet has too many characters or rate limit exceeded.  Not posting to Bluesky -- " + textToPost)
                             logging.error("Tweet has too many characters or rate limit exceeded.  Not posting to Bluesky -- " + textToPost)
